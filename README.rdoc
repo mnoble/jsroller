@@ -1,28 +1,78 @@
-= roller
+= Roller
 
-* http://github.com/#{github_username}/#{project_name}
+Roller lets you run JSLint from the command line while specifying it's
+options on a per-run basis.
 
-== DESCRIPTION:
+== DESCRIPTION
 
-FIX (describe your package)
+Normally you have specify the JSLint options in each and every JavaScript
+file you're going to run through it. That's dumb. Roller lets you set up
+the default set of options and/or choose which ones to use each time you
+run Roller.
 
-== FEATURES/PROBLEMS:
+== USAGE
 
-* FIX (list of features or problems)
+    $ roll [options] <file>
 
-== SYNOPSIS:
+<tt>options</tt> can be any combination of the flags below. <tt>file</tt>
+is the JavaScript file you want to check.
 
-  FIX (code sample of usage)
+=== JSLINT OPTION FLAGS
 
-== REQUIREMENTS:
+  --adsafe         ADsafe rules should be enforced. See http://www.ADsafe.org/.
+  --bitwise        bitwise operators should not be allowed
+  --browser        the standard browser globals should be predefined
+  --cap            upper case HTML should be allowed
+  --css            CSS workarounds should be tolerated
+  --debug          debugger statements should be allowed.
+  --devel          if browser globals that are useful in development should be predefined
+  --eqeqeq         === should be required
+  --evil           eval should be allowed
+  --forin          unfiltered for in statements should be allowed
+  --fragment       HTML fragments should be allowed
+  --immed          immediate function invocations must be wrapped in parens
+  --indent=N       the number of spaces used for indentation (default is 4)
+  --laxbreak       statement breaks should not be checked
+  --maxerr=N       the maximum number of warnings reported (default is 50)
+  --maxlen=N       the maximum number of characters in a line
+  --nomen          names should be checked for initial or trailing underbars
+  --newcap         Initial Caps must be used with constructor functions
+  --on             HTML event handlers should be allowed
+  --onevar         only one var statement per function should be allowed
+  --passfail       the scan should stop on first error
+  --plusplus       ++ and -- should not be allowed
+  --predef=a,b,c   an array of strings, the names of predefined global variables
+  --regexp         . and [^...] should not be allowed in RegExp literals.
+  --rhino          the Rhino environment globals should be predefined
+  --safe           the safe subset rules are enforced.
+  --strict         the ES5 "use strict"; pragma is required
+  --sub            subscript notation may be used for expressions better expressed in dot notation.
+  --undef          variables must be declared before used
+  --white          trict whitespace rules apply
+  --widget         Yahoo Widgets globals should be predefined
+  --windows        Windows globals should be predefined
 
-* FIX (list of requirements)
+See http://www.jslint.com/lint.html#options for more information on each options.
 
-== INSTALL:
+=== CONFIGURING YOUR DEFAULTS
 
-* FIX (sudo gem install, anything else)
+When installed, Roller creates the <tt>~/.roller</tt> directory with the
+JSLint executable and the default options Roller will hand off to JSLint.
+You can add or remove any options from the <tt>~/.roller/config.yaml</tt>
+file to suit your needs.
 
-== LICENSE:
+Any options in the config file will be overwritten by ones passed in
+at runtime via command line flags.
+
+== REQUIREMENTS
+
+* Rhino[http://www.mozilla.org/rhino/]
+
+== INSTALL
+
+  gem install roller
+
+== LICENSE
 
 (The MIT License)
 

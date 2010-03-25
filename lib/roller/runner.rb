@@ -43,7 +43,7 @@ module Roller
     # Ya! Party starta!
     def start
       assemble_lint
-      write_lint
+      write_file
       run
     end
     
@@ -54,7 +54,7 @@ module Roller
     def assemble_lint
       @lint =  "/*jslint #{ collect_lint } */\n"
       @lint << collect_globals
-      @lint << read_file
+      @lint << read_file_contents
     end
     
     # Writes all the Lint to a tmp file. This will be the actual file
@@ -65,7 +65,7 @@ module Roller
     end
     
     # The part that will make you cry because you realize your JavaScript
-    # is horribly formatted, at least in JSLint's mind.
+    # is horribly written, at least in JSLint's mind.
     #
     def run
       system("#{ RHINO } #{ JSLINT } /tmp/jslint")
@@ -79,17 +79,21 @@ module Roller
     end
     
     # Grabs the variables passed via the <tt>--predef</tt> flag and
-    # collects each one's JavaScript declaration into an array.
+    # collects each one's JavaScript declaration and creates the string
+    # that will be put above the content.
     #
     def collect_globals
-      @options.delete(:predef).map { |name| "var #{name}=true" }.join(";\n")
+      @options.delete(:predef).map { |name| "var #{name}=true;" }.join("\n")
     end
     
     # Reads in the contents of the file that needs to be sent through
     # JSLint.
     #
-    def read_file
-      @lintee = File.new(File.expand_path(@file)).read
+    def read_file_contents
+      f = File.new(File.expand_path(@file))
+      f.read
+    ensure
+      f.close
     end
     
   end
