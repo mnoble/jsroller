@@ -42,6 +42,7 @@ module Roller
     
     # Ya! Party starta!
     def start
+      copy_jslint unless File.exists?(File.expand_path(JSLINT))
       assemble_lint
       write_file
       run
@@ -83,7 +84,9 @@ module Roller
     # that will be put above the content.
     #
     def collect_globals
-      @options.delete(:predef).map { |name| "var #{name}=true;" }.join("\n")
+      unless @options[:predef].nil?
+        @options.delete(:predef).map { |name| "var #{name}=true;" }.join("\n")
+      end
     end
     
     # Reads in the contents of the file that needs to be sent through
@@ -94,6 +97,15 @@ module Roller
       f.read
     ensure
       f.close
+    end
+    
+    # Copies the JSLint file to the ~/.roller/
+    def copy_jslint
+      jslint = File.join(File.dirname(__FILE__), '../../scripts/jslint.js')
+      roller = File.expand_path('~/.roller/')
+      FileUtils.mkdir(roller)
+      FileUtils.copy(jslint, roller)
+      FileUtils.chmod(0755, "#{ roller }/jslint.js")
     end
     
   end
