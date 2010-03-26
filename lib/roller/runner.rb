@@ -53,9 +53,10 @@ module Roller
     # the actual JavaScript file's content.
     #
     def assemble_lint
-      @lint =  "/*jslint #{ collect_lint } */\n"
-      @lint << collect_globals
-      @lint << read_file_contents
+      @lint = ""
+      @lint << "#{ collect_globals }\n" unless @options[:predef].nil?
+      @lint << "/*jslint #{ collect_lint } */\n" unless @options.empty?
+      @lint << read_file_contents if File.exists?(File.expand_path(@file))
     end
     
     # Writes all the Lint to a tmp file. This will be the actual file
@@ -84,9 +85,7 @@ module Roller
     # that will be put above the content.
     #
     def collect_globals
-      unless @options[:predef].nil?
-        @options.delete(:predef).map { |name| "var #{name}=true;" }.join("\n")
-      end
+      @options.delete(:predef).map { |name| "var #{name} = true;" }.join("\n")
     end
     
     # Reads in the contents of the file that needs to be sent through
