@@ -1,6 +1,6 @@
-= Roller
+= JSRoller
 
-Roller lets you run JSLint from the command line while specifying it's
+JSRoller lets you run JSLint from the command line while specifying it's
 options on a per-run basis.
 
 == DESCRIPTION
@@ -56,7 +56,7 @@ See http://www.jslint.com/lint.html#options for more information on each options
 
 === CONFIGURING YOUR DEFAULTS
 
-When installed, Roller creates the <tt>~/.roller</tt> directory with the
+When installed, JSRoller creates the <tt>~/.roller</tt> directory with the
 JSLint executable and the default options Roller will hand off to JSLint.
 You can add or remove any options from the <tt>~/.roller/config.yaml</tt>
 file to suit your needs.
@@ -70,13 +70,13 @@ at runtime via command line flags.
 
 == INSTALL
 
-  gem install roller
+  gem install jsroller
 
 == LICENSE
 
 (The MIT License)
 
-Copyright (c) 2010 FIXME full name
+Copyright (c) 2010 Matte Noble
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

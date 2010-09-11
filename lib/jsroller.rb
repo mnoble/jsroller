@@ -1,7 +1,7 @@
 require 'fileutils'
 require 'magni'
 
-module Roller
+module JSRoller
   VERSION = '0.1.0'
-  autoload :Runner, 'roller/runner'
+  autoload :Runner, 'jsroller/runner'
 end
