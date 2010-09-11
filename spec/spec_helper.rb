@@ -1,12 +1,11 @@
-require File.dirname(__FILE__) + '/../lib/roller'
+require File.dirname(__FILE__) + '/../lib/jsroller'
 
-module Roller
+module JSRoller
   module SpecHelper
     
     class FakeJSFile
-      def read
-        "(function() { console.log('winner!'); })()"
-      end
+      def read; "(function() { console.log('winner!'); })()"; end
+      def close; end
     end
     
     def stub_file_new

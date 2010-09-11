@@ -1,8 +1,8 @@
-module Roller
+module JSRoller
   class Runner < Magni
     
     RHINO  = "java org.mozilla.javascript.tools.shell.Main"
-    JSLINT = "~/.roller/jslint.js"
+    JSLINT = "~/.jsroller/jslint.js"
     
     map :last        => :file
     map "--adsafe"   => :boolean
@@ -98,10 +98,12 @@ module Roller
       f.close
     end
     
+  private
+    
     # Copies the JSLint file to the ~/.roller/
     def copy_jslint
       jslint = File.join(File.dirname(__FILE__), '../../scripts/jslint.js')
-      roller = File.expand_path('~/.roller/')
+      roller = File.expand_path('~/.jsroller/')
       FileUtils.mkdir(roller)
       FileUtils.copy(jslint, roller)
       FileUtils.chmod(0755, "#{ roller }/jslint.js")
